@@ -73,12 +73,10 @@ class pr0_mm:
 
             #print the later post
             print("Post found: " + str(post["id"]) + " and Promotion: " + str(post["promoted"]))
-            # clone payload
-            payload2 = dict(payload)
 
             post_id = post["id"]
             # get infos for this post
-            info = api.info(post_id)
+            info = self._API.info(post_id)
 
             #send top 3 tags and link to the post to mattermost
             text =  ("**" + info["tags"][0]["tag"] + "**   " +
@@ -88,17 +86,17 @@ class pr0_mm:
             
 
             # add Text to payload
-            payload2.update({"text": text })
+            payload.update({"text": text })
             # send request to webhook
-            requests.post(self.url, data=json.dumps(payload2), headers=headers)
+            requests.post(self.url, data=json.dumps(payload), headers=headers)
 
 
             # if the post is an image or gif, post the direct link as additional message 
             # to the webhook. Mattermost only embedds images when they stand alone in a 
             # message.
             if post["image"].endswith((".jpg",".png",".gif")):
-                payload2["text"] = "http://img.pr0gramm.com/" + post["image"]
-                r = requests.post(url, data=json.dumps(payload2), headers=headers)
+                payload["text"] = "http://img.pr0gramm.com/" + post["image"]
+                r = requests.post(self.url, data=json.dumps(payload), headers=headers)
 
         self._latest_post_promotion = posts[0]["promoted"]
 

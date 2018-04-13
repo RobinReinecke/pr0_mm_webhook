@@ -2,7 +2,7 @@
 
 Posting in a given interval the newest Posts from http://pr0gramm.com to a mattermost incoming webhook (https://docs.mattermost.com/developer/webhooks-incoming.html)
 
-##example
+## example
 
 ```python
 import pr0_mm_webhook
