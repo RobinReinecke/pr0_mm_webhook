@@ -79,7 +79,7 @@ class pr0_mm:
         print(self._getTimestamp() + "Latest Post-ID: " + str(posts[0]["id"]) + " and Promotion: " + str(posts[0]["promoted"]))
         
         if self._latest_post_promotion == posts[0]["promoted"]:
-            print(self._getTimestamp + "No new Posts found.")
+            print(self._getTimestamp() + "No new Posts found.")
         else:
             #iterate over posts
             for post in posts:
