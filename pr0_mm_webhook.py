@@ -114,7 +114,7 @@ class pr0_mm:
                     payload["text"] = "http://img.pr0gramm.com/" + post["image"]
                 # else post the thumbnail
                 else:
-                    payload["text"] = "http://img.pr0gramm.com/" + post["thumb"]
+                    payload["text"] = "http://thumb.pr0gramm.com/" + post["thumb"]
 
                 r = requests.post(self.url, data=json.dumps(payload), headers=headers)
 
