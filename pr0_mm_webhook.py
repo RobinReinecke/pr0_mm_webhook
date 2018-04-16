@@ -98,7 +98,7 @@ class pr0_mm:
                 text =  ("**" + info["tags"][0]["tag"] + "**   " +
                             "**" + info["tags"][1]["tag"] + "**   " +
                             "**" + info["tags"][2]["tag"] + "**   " +
-                            "\n**Link:** " + "http://pr0gramm.com/top/" + str(post["id"]) + "\n")
+                            "\n**Link:** " + "http://pr0gramm.com/top/" + str(post_id) + "\n")
                 
 
                 # add Text to payload
