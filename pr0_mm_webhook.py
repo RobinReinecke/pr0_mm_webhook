@@ -94,18 +94,24 @@ class pr0_mm:
                 # get infos for this post
                 info = self._API.info(post_id)
 
-                #send top 3 tags and link to the post to mattermost
-                text =  ("**" + info["tags"][0]["tag"] + "**   " +
-                            "**" + info["tags"][1]["tag"] + "**   " +
-                            "**" + info["tags"][2]["tag"] + "**   " +
-                            "\n**Link:** " + "http://pr0gramm.com/top/" + str(post_id) + "\n")
+                tags = info["tags"]
+
+                # order tags by confidence
+                tags = sorted(tags, key=lambda tag: tag["confidence"], reverse=True)
+
+                #send max top 3 tags and link to the post to mattermost
+                text = ""
+                for index, tag in enumerate(tags):
+                    text += "**" + tag["tag"] +  "**   "
+                    if index == 2:
+                        break
                 
+                text += "\n**Link:** " + "http://pr0gramm.com/top/" + str(post_id) + "\n"
 
                 # add Text to payload
                 payload.update({"text": text })
                 # send request to webhook
                 requests.post(self.url, data=json.dumps(payload), headers=headers)
-
 
                 # if the post is an image or gif, post the direct link as additional message 
                 # to the webhook. Mattermost only embedds images when they stand alone in a 
